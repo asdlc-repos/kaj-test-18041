@@ -1,0 +1,24 @@
+apiVersion: openchoreo.dev/v1alpha1
+metadata:
+  name: leave-web-app
+
+endpoints:
+  - name: http
+    type: HTTP
+    port: 8080
+    basePath: /
+    visibility:
+      - external
+
+dependencies:
+  endpoints:
+    - component: leave-api
+      name: http
+      visibility: project
+      envBindings:
+        address: LEAVE_API_URL
+    - component: manager-api
+      name: http
+      visibility: project
+      envBindings:
+        address: MANAGER_API_URL
